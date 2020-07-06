@@ -1,5 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
+
+/**
+ * Interface utilizada para definir as propriedades customizadas do componente
+ */
+interface FormProps {
+  hasError: boolean;
+}
 
 /**
  * As crases ` são utilizadas como "templates literal" para possibilitar
@@ -15,7 +22,10 @@ export const Title = styled.h1`
   margin-top: 80px;
 `;
 
-export const Form = styled.form`
+/**
+ * A interface de propriedades customizadas é indicada para o componente passando-a entre <>
+ */
+export const Form = styled.form<FormProps>`
   margin-top: 48px;
   max-width: 700px;
   display: flex;
@@ -32,6 +42,19 @@ export const Form = styled.form`
     border: 0;
     border-radius: 5px 0 0 5px;
     color: #3a3a3a;
+    border: 2px solid #fff;
+    border-right: 0;
+
+    /**
+    * Podemos acessar as propriedades customizadas através de arrow functions
+    * A funçao "css" do "styled-components" deve ser utilizada para possibilitar a escrita de
+    * CSS dentro da arrow function
+    */
+    ${props =>
+      props.hasError &&
+      css`
+        border-color: #c53030;
+      `}
 
     /**
     * Utiliza-se :: para acessar uma propriedade do elemento
@@ -60,6 +83,12 @@ export const Form = styled.form`
       background: ${shade(0.2, '#04d361')};
     }
   }
+`;
+
+export const Error = styled.span`
+  display: block;
+  color: #c53030;
+  margin-top: 8px;
 `;
 
 export const Repositories = styled.div`

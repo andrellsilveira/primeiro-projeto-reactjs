@@ -19,10 +19,12 @@ const Routes: React.FC = () => (
    * acionar outra rota, por exemplo "/repository", deve ser utilizada a
    * propriedade "exact", indicando que deve ser verificado o caminho exato
    * indicado para o atributo path.
+   * O símbolo "+" no parâmetro da rota indica que tudo o que vem depois da barra de início do
+   * parâmetro da rota faz parte do parâmetro.
    */
   <Switch>
     <Route path="/" exact component={Dashboard} />
-    <Route path="/repository" component={Repository} />
+    <Route path="/repositories/:repository+" component={Repository} />
   </Switch>
   /**
    * path: Indica o caminho do arquivo para a rota
